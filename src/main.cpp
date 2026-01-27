@@ -1,20 +1,20 @@
-#include <vector>
 #include <cstdio>
-#include <cstdlib>
+#include "utils/string_utils.h"
+#include "utils/compression.h"
+#include "utils/file_utils.h"
+#include "utils/hash_utils.h"
 
+int main()
+{
+	std::string hash = Sha256HashHex("hello");
+	printf("SHA256('hello'): %s\n", hash.c_str());
 
-int main(int argc, char* argv[]) {
-	if (argc != 2) {
-		fprintf(stderr, "Usage: %s <size>\n", argv[0]);
-		exit(1);
-	}
+	std::string original = "hello world hello world hello world";
+	std::string compressed = ZlibCompress(original);
+	std::string decompressed = ZlibDecompress(compressed);
 
-	std::vector<int> v1{20, 30, 12, 3, 45, 11, 1, 0};
+	printf("Compression: %zu -> %zu bytes\n", original.size(), compressed.size());
+	printf("Roundtrip OK: %s\n", (original == decompressed) ? "yes" : "no");
 
-	for (std::vector<int>::iterator it{v1.begin()}; it != v1.end(); ++it) {
-		printf("%d\n", *it);
-	}
-
-	exit(0);
+	return 0;
 }
-
