@@ -3,12 +3,14 @@
 #include <cstdio>
 
 #include "commands/init.h"
+#include "commands/hash_object.h"
 
 void PrintUsage(const char *program)
 {
 	fprintf(stderr, "Usage: %s <command> [<args>]\n\n", program);
 	fprintf(stderr, "Commands:\n");
-	fprintf(stderr, "  init [path]     Initialize a new repository\n");
+	fprintf(stderr, "   init [path]                        Initialize a new repository\n");
+	fprintf(stderr, "   hash-object [-w] [--stdin] <file>  Compute object hash\n");
 }
 
 int main(int argc, char *argv[])
@@ -34,6 +36,10 @@ int main(int argc, char *argv[])
 		}
 
 		return CmdInit(path);
+	}
+	if (command == "hash-object")
+	{
+		return CmdHashObject(argc - 2, argv + 2);
 	}
 
 	fprintf(stderr, "Unknown command: %s\n", command.c_str());
