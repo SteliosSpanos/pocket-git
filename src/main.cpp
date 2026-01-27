@@ -1,20 +1,42 @@
+#include <cstring>
+#include <string>
 #include <cstdio>
-#include "utils/string_utils.h"
-#include "utils/compression.h"
-#include "utils/file_utils.h"
-#include "utils/hash_utils.h"
 
-int main()
+#include "commands/init.h"
+
+void PrintUsage(const char *program)
 {
-	std::string hash = Sha256HashHex("hello");
-	printf("SHA256('hello'): %s\n", hash.c_str());
+	fprintf(stderr, "Usage: %s <command> [<args>]\n\n", program);
+	fprintf(stderr, "Commands:\n");
+	fprintf(stderr, "  init [path]     Initialize a new repository\n");
+}
 
-	std::string original = "hello world hello world hello world";
-	std::string compressed = ZlibCompress(original);
-	std::string decompressed = ZlibDecompress(compressed);
+int main(int argc, char *argv[])
+{
+	if (argc < 2)
+	{
+		PrintUsage(argv[0]);
+		return 1;
+	}
 
-	printf("Compression: %zu -> %zu bytes\n", original.size(), compressed.size());
-	printf("Roundtrip OK: %s\n", (original == decompressed) ? "yes" : "no");
+	std::string command = argv[1];
 
-	return 0;
+	if (command == "init")
+	{
+		std::string path;
+		if (argc >= 3)
+		{
+			path = argv[2];
+		}
+		else
+		{
+			path = ".";
+		}
+
+		return CmdInit(path);
+	}
+
+	fprintf(stderr, "Unknown command: %s\n", command.c_str());
+	PrintUsage(argv[0]);
+	return 1;
 }
