@@ -75,6 +75,10 @@ bool WriteFile(const std::string &path, const std::string &content)
         return false;
     }
 
-    file.write(content.c_str(), content.size());
-    return file.good();
+    if (!file.write(content.c_str(), content.size()))
+    {
+        return false;
+    }
+
+    return true;
 }
