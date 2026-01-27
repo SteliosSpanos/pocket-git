@@ -27,7 +27,7 @@ int CmdHashObject(int argc, char *argv[])
         {
             write_object = true;
         }
-        else if (strcmp(argv[i], "-stdin") == 0)
+        else if (strcmp(argv[i], "--stdin") == 0)
         {
             use_stdin = true;
         }
