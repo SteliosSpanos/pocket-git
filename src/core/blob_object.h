@@ -8,16 +8,19 @@ class BlobObject : public Object
 {
 private:
     std::string content_;
+    bool valid_;
 
 public:
+    BlobObject();
     explicit BlobObject(const std::string &content);
 
     std::string Serialize() const;
     std::string GetType() const;
     std::string GetContent() const;
     size_t GetSize() const;
+    bool isValid() const;
 
-    static BlobObject *FromFile(const std::string &path);
+    bool LoadFromFile(const std::string &path);
 };
 
 #endif

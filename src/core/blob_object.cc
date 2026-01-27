@@ -3,8 +3,24 @@
 
 #include <sstream>
 
+BlobObject::BlobObject()
+    : content_(), valid_(false) {}
+
 BlobObject::BlobObject(const std::string &content)
-    : content_(content) {}
+    : content_(content), valid_(true) {}
+
+bool BlobObject::LoadFromFile(const std::string &path)
+{
+    if (!PathExists(path))
+    {
+        valid_ = false;
+        return false;
+    }
+
+    content_ = ReadFile(path);
+    valid_ = true;
+    return true;
+}
 
 std::string BlobObject::Serialize() const
 {
@@ -31,15 +47,4 @@ std::string BlobObject::GetContent() const
 size_t BlobObject::GetSize() const
 {
     return content_.size();
-}
-
-BlobObject *BlobObject::FromFile(const std::string &path)
-{
-    std::string content = ReadFile(path);
-    if (content.empty() && !PathExists(path))
-    {
-        return NULL;
-    }
-
-    return new BlobObject(content);
 }
