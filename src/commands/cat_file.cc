@@ -7,7 +7,7 @@
 
 int CmdCatFile(int argc, char *argv[])
 {
-    if (argc < 2)
+    if (argc < 1)
     {
         fprintf(stderr, "Usage: pocket-git cat-file (-p|-t|-s|e) <hash>\n");
         return 1;
