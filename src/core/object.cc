@@ -50,7 +50,7 @@ ObjectData Object::Read(const Repository &repo, const std::string &hash)
 {
     ObjectData data;
 
-    std::string path = repo.GetGitDir() + "/" + hash.substr(0, 2) + "/" + hash.substr(2);
+    std::string path = repo.GetObjectsDir() + "/" + hash.substr(0, 2) + "/" + hash.substr(2);
     if (!PathExists(path))
     {
         return data;
