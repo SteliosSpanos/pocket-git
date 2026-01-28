@@ -5,6 +5,15 @@
 
 class Repository;
 
+struct ObjectData
+{
+    std::string type;
+    size_t size;
+    std::string content;
+    bool valid;
+
+    ObjectData() : size(0), valid(false) {}
+};
 class Object
 {
 public:
@@ -17,6 +26,8 @@ public:
     std::string ComputeHash() const;
 
     std::string Write(const Repository &repo) const;
+
+    static ObjectData Read(const Repository &repo, const std::string &hash);
 };
 
 #endif
