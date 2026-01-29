@@ -1,10 +1,10 @@
-# pocket-git
+# Pocket-Git
 
 A minimal Git implementation in C++03, built for educational purposes and as preparation for contributing to [CERN-HSF cvmfs](https://github.com/cvmfs/cvmfs).
 
 ## Overview
 
-pocket-git implements core Git functionality from scratch, providing insight into Git's internal object model, compression strategies, and command-line interface design. The project adheres strictly to C++03 standards and follows cvmfs coding conventions.
+Pocket-Git implements core Git functionality from scratch, providing insight into Git's internal object model, compression strategies, and command-line interface design. The project adheres strictly to C++03 standards and follows cvmfs coding conventions.
 
 Unlike standard Git which uses SHA-1 hashing, pocket-git uses SHA-256 for object identification.
 
