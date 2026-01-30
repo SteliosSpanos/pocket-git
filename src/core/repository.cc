@@ -51,7 +51,7 @@ bool Repository::CreateDirectoryStructure()
 
 bool Repository::WriteInitialFiles()
 {
-    std::string head_content = "ref: refs/head/main\n";
+    std::string head_content = "ref: refs/heads/main\n";
     if (!WriteFile(git_dir_ + "/HEAD", head_content))
     {
         return false;
