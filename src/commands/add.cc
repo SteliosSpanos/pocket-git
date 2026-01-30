@@ -44,7 +44,7 @@ int CmdAdd(int argc, char *argv[])
         std::string hash = blob.Write(repo);
         if (hash.empty())
         {
-            fprintf(stderr, "fatal: failed to write object for 's'\n", filepath.c_str());
+            fprintf(stderr, "fatal: failed to write object for '%s'\n", filepath.c_str());
             return 1;
         }
 

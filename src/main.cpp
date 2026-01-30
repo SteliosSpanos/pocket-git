@@ -5,6 +5,7 @@
 #include "commands/init.h"
 #include "commands/hash_object.h"
 #include "commands/cat_file.h"
+#include "commands/add.h"
 
 void PrintUsage(const char *program)
 {
@@ -13,6 +14,7 @@ void PrintUsage(const char *program)
 	fprintf(stderr, "   init [path]                        Initialize a new repository\n");
 	fprintf(stderr, "   hash-object [-w] [--stdin] <file>  Compute object hash\n");
 	fprintf(stderr, "   cat-file (-p|-t|-s|-e) <hash>    Show object info\n");
+	fprintf(stderr, "   add <file> ...                   Add objects to the staging area\n");
 }
 
 int main(int argc, char *argv[])
@@ -39,13 +41,20 @@ int main(int argc, char *argv[])
 
 		return CmdInit(path);
 	}
+
 	if (command == "hash-object")
 	{
 		return CmdHashObject(argc - 2, argv + 2);
 	}
+
 	if (command == "cat-file")
 	{
 		return CmdCatFile(argc - 2, argv + 2);
+	}
+
+	if (command == "add")
+	{
+		return CmdAdd(argc - 2, argv + 2);
 	}
 
 	fprintf(stderr, "Unknown command: %s\n", command.c_str());
